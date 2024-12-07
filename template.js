@@ -2,7 +2,8 @@ let canvasWidth = 600;
 let canvasHeight = 600;
 
 function setup() {
-  createCanvas(canvasWidth, canvasHeight);
+  let canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent("canvas");
 }
 
 function draw() {
