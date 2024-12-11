@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Fractal Tree</title>
+
+    <link rel="stylesheet" href="../../reset.css" />
+    <link rel="stylesheet" href="../../style.css" />
+
+    <script src="../../p5.js"></script>
+    <script src="script.js" defer></script>
+
+    <style>
+      .slider-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      label {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      input[type="range"] {
+        width: 80%;
+      }
+
+      #slider-value {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="canvas-container">
+      <h1 class="canvas-title">Simple Fractal Tree</h1>
+      <p class="project-description">[Project Description]</p>
+
+      <div class="slider-container">
+        <label for="slider">Branch Angle (Deg)</label>
+        <input type="range" id="slider" min="0" max="360" value="30" step="1" />
+        <span id="slider-value">30</span>
+        <div id="canvas"></div>
+      </div>
+    </main>
+  </body>
+</html>
