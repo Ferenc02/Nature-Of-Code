@@ -55,6 +55,7 @@ function draw() {
 
       let nextCells = [];
 
+      // Calculate the next generation of cells
       for (let i = 0; i < cells.length; i++) {
         let left = cells[(i - 1 + cells.length) % cells.length];
         let right = cells[(i + 1 + cells.length) % cells.length];
@@ -68,6 +69,7 @@ function draw() {
   }
 }
 
+// Hashmap to store the rules for the cellular automata
 let rules = new Map([
   ["111", 0],
   ["110", 0],
