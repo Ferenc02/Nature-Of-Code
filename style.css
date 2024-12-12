@@ -6,6 +6,10 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+main {
+  padding: 1rem;
+}
+
 .canvas-container {
   display: flex;
   flex-direction: column;

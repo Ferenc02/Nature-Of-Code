@@ -91,6 +91,13 @@ function draw() {
 }
 
 function mouseWheel(event) {
+  // if mouse is inside the canvas
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+    event.preventDefault();
+  } else {
+    return;
+  }
+
   // Zoom in our out based on the mouse wheel direction
 
   let zoomFactorAdjustment = event.deltaY < 0 ? 1 - zoomSpeed : 1 + zoomSpeed;
@@ -112,6 +119,14 @@ function mouseWheel(event) {
     centerY + (imaginaryRange.y - centerY) * zoomFactorAdjustment;
 
   // Redraw the Mandelbrot set
+  currentRowIndex = 0;
+  loadPixels();
+  loop();
+}
+
+function resetZoom() {
+  realRange = createVector(-2.0, 1);
+  imaginaryRange = createVector(-1.5, 1.5);
   currentRowIndex = 0;
   loadPixels();
   loop();
