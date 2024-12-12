@@ -9,14 +9,20 @@ let imaginaryRange;
 let currentRowIndex = 0; // Track the current row being rendered
 let rowsPerRender = 25; // Number of rows to render per frame
 
+let zoomFactor = 0.1; // Zoom sensitivity
+let zoomSpeed = 0.2; // Speed of zooming
+
+let lastDistance = 0;
+
 function setup() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent("canvas");
 
   // Define the real and imaginary axis ranges for the Mandelbrot set
-  realRange = createVector(-1.5, 1.5);
+  realRange = createVector(-2.0, 1);
   imaginaryRange = createVector(-1.5, 1.5);
 
+  frameRate(60);
   pixelDensity(1);
   loadPixels();
 }
@@ -29,6 +35,7 @@ function draw() {
   ) {
     for (let x = 0; x < width; x++) {
       // Map the pixel's x and y positions to the real and imaginary ranges
+
       let realPart = map(x, 0, width, realRange.x, realRange.y);
       let imaginaryPart = map(
         row,
@@ -81,4 +88,31 @@ function draw() {
   if (currentRowIndex >= height) {
     noLoop();
   }
+}
+
+function mouseWheel(event) {
+  // Zoom in our out based on the mouse wheel direction
+
+  let zoomFactorAdjustment = event.deltaY < 0 ? 1 - zoomSpeed : 1 + zoomSpeed;
+
+  // Adjust the real and imaginary ranges based on the zoom factor
+  let centerX = map(mouseX, 0, width, realRange.x, realRange.y);
+  let centerY = map(mouseY, 0, height, imaginaryRange.x, imaginaryRange.y);
+
+  // Zoom in our out by adjusting the ranges
+  let rangeWidth = realRange.y - realRange.x;
+  let rangeHeight = imaginaryRange.y - imaginaryRange.x;
+
+  realRange.x = centerX - (centerX - realRange.x) * zoomFactorAdjustment;
+  realRange.y = centerX + (realRange.y - centerX) * zoomFactorAdjustment;
+
+  imaginaryRange.x =
+    centerY - (centerY - imaginaryRange.x) * zoomFactorAdjustment;
+  imaginaryRange.y =
+    centerY + (imaginaryRange.y - centerY) * zoomFactorAdjustment;
+
+  // Redraw the Mandelbrot set
+  currentRowIndex = 0;
+  loadPixels();
+  loop();
 }
